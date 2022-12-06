@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { auth } from '../firebase';
+import { createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 
 const AuthContext = React.createContext();
 
@@ -14,13 +15,13 @@ export function AuthProvider({ children }) {
     // This is the signup function, it will create a new user with the email and password
     function signup(email, password){
         // This will return a promise, so we can use it in the signup component
-        return auth.createUserWithEmailAndPassword(email, password);
+        return createUserWithEmailAndPassword(auth, email, password);
     }
 
     // onAuthStateChanged is a listener provided by firebase, 
     // it will listen for any changes in the authentication state
     useEffect(()=>{
-        const unsubscribe = auth.onAuthStateChanged( user => {
+        const unsubscribe = onAuthStateChanged( auth, (user) => {
             // using the useState setCurrent user function to set the current user.
             setCurrentUser(user);
         })

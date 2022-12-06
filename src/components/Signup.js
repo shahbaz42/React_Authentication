@@ -3,7 +3,7 @@ import { Button, Card, Form, Alert } from 'react-bootstrap';
 import { useAuth } from '../context/AuthContext';
 
 export default function Signup() {
-    // useRefs for storing the email and password
+    // useRefs for storing the email and password 
     const emailRef = useRef()
     const passwordRef = useRef()
     const passwordConfirmationRef = useRef()
@@ -26,9 +26,10 @@ export default function Signup() {
         try {
             setError('')
             setLoading(true)
-            await signup(emailRef.current.value, passwordRef.current.value); 
+            const result = await signup(emailRef.current.value, passwordRef.current.value); 
             setLoading(false)  
         } catch (error) {
+            setLoading(false);
             setError('Failed to create an account.')
         }
     }
@@ -38,7 +39,7 @@ export default function Signup() {
         <Card>
             <Card.Body>
                 <h2 className="text-center mb-4">Sign Up</h2>
-                { error && <div className="alert alert-danger">{error}</div> }
+                { error && <Alert variant='danger' >{error}</Alert> }
                 <Form onSubmit={handleSubmit}>
                     <Form.Group id="email">
                         <Form.Label>Email</Form.Label>
