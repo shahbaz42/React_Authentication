@@ -7,7 +7,6 @@ export default function Signup() {
     const emailRef = useRef()
     const passwordRef = useRef()
     const passwordConfirmationRef = useRef()
-    // signup from useAuth
     const { signup } = useAuth()
     // useState stores the error message
     const [error, setError] = useState('')
@@ -26,9 +25,10 @@ export default function Signup() {
         try {
             setError('')
             setLoading(true)
-            const result = await signup(emailRef.current.value, passwordRef.current.value); 
+            await signup(emailRef.current.value, passwordRef.current.value); 
             setLoading(false)  
         } catch (error) {
+            console.log(error);
             setLoading(false);
             setError('Failed to create an account.')
         }

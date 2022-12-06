@@ -11,7 +11,8 @@ export function useAuth() {
 export function AuthProvider({ children }) {
     // This use state is for the current user, It will store the current user
     const [ currentUser, setCurrentUser ] = useState();
-    
+    const [loading, setLoading] = useState(true);
+
     // This is the signup function, it will create a new user with the email and password
     function signup(email, password){
         // This will return a promise, so we can use it in the signup component
@@ -24,6 +25,7 @@ export function AuthProvider({ children }) {
         const unsubscribe = onAuthStateChanged( auth, (user) => {
             // using the useState setCurrent user function to set the current user.
             setCurrentUser(user);
+            setLoading(false);
         })
         return unsubscribe;
     }, [])
@@ -37,7 +39,7 @@ export function AuthProvider({ children }) {
     // This will return the AuthContext.Provider with the value and the children
     return (
         <AuthContext.Provider value={value}>
-            {children}
+            {!loading && children}
         </AuthContext.Provider>
     )
 }
