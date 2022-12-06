@@ -3,7 +3,6 @@ import { Container } from 'react-bootstrap';
 import { AuthProvider } from '../context/AuthContext';
 
 function App() {
-  console.log(process.env.REACT_APP_FIREBASE_API_KEY)
   return <>
     <AuthProvider>
       <Container
