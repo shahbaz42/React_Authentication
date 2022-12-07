@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { Button, Card, Form, Alert } from 'react-bootstrap';
 import { useAuth } from '../context/AuthContext';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Signup() {
     // useRefs for storing the email and password 
@@ -11,6 +11,7 @@ export default function Signup() {
     // useState stores the error message
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
+    const navigate = useNavigate();
 
     // This function will be called when the form is submitted
     async function handleSubmit(e) {
@@ -22,9 +23,10 @@ export default function Signup() {
             console.log("Attempting to log in...")
             await login(emailRef.current.value, passwordRef.current.value); // to change to login
             setLoading(false)  
+            navigate("/")
         } catch (error) {
             setLoading(false);
-            setError('Failed to log in...')
+            setError('Failed to log in...');
         }
     }
 
