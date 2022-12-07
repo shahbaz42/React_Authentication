@@ -20,7 +20,6 @@ export default function Signup() {
         try {
             setError('')
             setLoading(true)
-            console.log("Attempting to log in...")
             await login(emailRef.current.value, passwordRef.current.value); // to change to login
             setLoading(false)  
             navigate("/")
