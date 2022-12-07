@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { auth } from '../firebase';
-import { createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 
 const AuthContext = React.createContext();
 
@@ -19,6 +19,12 @@ export function AuthProvider({ children }) {
         return createUserWithEmailAndPassword(auth, email, password);
     }
 
+    // This is the login function, it will login the user with the email and password
+    function login(email, password){
+        // This will return a promise, so we can use it in the login component
+        return signInWithEmailAndPassword(auth, email, password);
+    }
+
     // onAuthStateChanged is a listener provided by firebase, 
     // it will listen for any changes in the authentication state
     useEffect(()=>{
@@ -33,7 +39,8 @@ export function AuthProvider({ children }) {
     // This is the value that'll be passed to the AuthContext.Provider
     const value = {
         currentUser,
-        signup
+        signup,
+        login,
     }
 
     // This will return the AuthContext.Provider with the value and the children
