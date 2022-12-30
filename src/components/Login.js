@@ -3,7 +3,7 @@ import { Button, Card, Form, Alert } from 'react-bootstrap';
 import { useAuth } from '../context/AuthContext';
 import { Link, useNavigate } from "react-router-dom";
 
-export default function Signup() {
+export default function Login() {
     // useRefs for storing the email and password 
     const emailRef = useRef()
     const passwordRef = useRef()
@@ -48,6 +48,9 @@ export default function Signup() {
                         {loading ? loadingAnimation() : "Login"}
                     </Button>
                 </Form>
+                <div className="w-100 text-center mt-2">
+                    <Link to="/forgot-password">Forgot Password?</Link>
+                </div>
             </Card.Body>
         </Card>
         <div className="w-100 text-center mt-2">
