@@ -5,7 +5,9 @@ import {
     signInWithEmailAndPassword, 
     onAuthStateChanged, 
     signOut, 
-    sendPasswordResetEmail
+    sendPasswordResetEmail,
+    updateEmail,
+    updatePassword
 } from "firebase/auth";
 
 const AuthContext = React.createContext();
@@ -40,6 +42,14 @@ export function AuthProvider({ children }) {
         return sendPasswordResetEmail(auth, email);
     }
 
+    function updateUserEmail(email){
+        return updateEmail(currentUser, email);
+    }
+
+    function updateUserPassword(password){
+        return updatePassword(currentUser, password);
+    }
+
     // onAuthStateChanged is a listener provided by firebase, 
     // it will listen for any changes in the authentication state
     useEffect(()=>{
@@ -57,7 +67,9 @@ export function AuthProvider({ children }) {
         signup,
         login,
         logout,
-        resetPassword
+        resetPassword,
+        updateUserEmail,
+        updateUserPassword
     }
 
     // This will return the AuthContext.Provider with the value and the children
