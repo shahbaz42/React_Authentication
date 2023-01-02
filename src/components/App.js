@@ -5,6 +5,7 @@ import Login from './Login';
 import Signup from './Signup';
 import Dashboard from './Dashboard';
 import ForgotPassword from "./ForgotPassword";
+import UpdateProfile from "./UpdateProfile";
 import PrivateRoute from './PrivateRoute';
 
 function App() {
@@ -19,6 +20,9 @@ function App() {
             <Routes>
               <Route exact element={<PrivateRoute />}>
                 <Route exact path="/" element={<Dashboard />} />
+              </Route>
+              <Route exact element={<PrivateRoute />}>
+                <Route path="/update-profile" element={<UpdateProfile />} />
               </Route>
               <Route path="/signup" element={<Signup />} />
               <Route path="/login" element={<Login />} />
